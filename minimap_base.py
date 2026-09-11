@@ -1,9 +1,10 @@
 """Star Citizen local 3D minimap. Python 3 + Tkinter; no pip packages required.
 
 Reads v12 tracking_status.json. Raw CamDir components are coupled Euler values.
-Uses Q Rz(C) Ry(B) Rx(A), nose +Y. Q is fitted to three distant reference
-observations: 3.2 degrees training RMS, 4.8-7.9 degrees held-out error.
-Approximate calibration; absolute bank is unverified. No velocity correction.
+Uses Q Rz(C) Ry(B) Rx(A), nose +Y. Q uses zero-CamDir forward and
+up-strafe measurements. Forward is preserved; up is orthogonalized.
+Approximate calibration; combined rotations need in-game validation.
+Camera must be centered with headtracking/freelook disabled for ship attitude.
 """
 import argparse
 from collections import deque
@@ -23,11 +24,7 @@ CALIBRATION_ANGLES = (95., 0., 9.)
 STATION_TOP_Z = 200.9345
 STATION_HEIGHT_M = (STATION_TOP_Z - REFERENCE[2]) * 1000
 STATION_BASE_SCALE = STATION_HEIGHT_M / 195.0
-FRAME_ROTATION = (
-    (-0.17722959466993118, 0.983796470988559, -0.027095653592235463),
-    (-0.9787940915559331, -0.17332119073225846, 0.10918741309486664),
-    (0.10272194073482376, 0.045872306608788146, 0.9936518174783665),
-)
+FRAME_ROTATION = ((-0.6853462109896081, 0.7233816293958923, -0.08378298953087897), (-0.7282053752580094, -0.6801229273057725, 0.08455610680706975), (0.004183602219300927, 0.11896143074782947, 0.992890062125158))
 
 
 def station_geometry():
@@ -302,9 +299,9 @@ def direction_error(a, b):
 
 def enrich_sample(sample, mode, second_reference=None, phase=None):
     sample['observation_type'] = mode
-    sample['rotation_model'] = 'v8_three_distant_views_Q_Rz(C)_Ry(B)_Rx(A)_nose_plusY'
+    sample['rotation_model'] = 'v11_zero_forward_up_Q_Rz(C)_Ry(B)_Rx(A)_nose_plusY'
     sample['display_frame_rotation'] = FRAME_ROTATION
-    sample['calibration_status'] = 'approximate_nose_absolute_bank_unverified'
+    sample['calibration_status'] = 'approximate_zero_frame_centered_camera_required'
     sample['candidate_nose_error_degrees'] = direction_error(rotate((0,1,0), sample['camdir_raw']), sample['direction_to_reference']) if mode != 'roll_sequence' else None
     sample['nose_aim_confirmed'] = mode != 'roll_sequence'
     if mode == 'roll_sequence':
@@ -338,7 +335,7 @@ class Minimap:
         self.trail = deque(maxlen=2000)
         self.flight_samples = deque(maxlen=12)
         self.correction = (1.,0.,0.,0.)
-        self.calibration_note = 'Approximate 3-view calibration • bank unverified'
+        self.calibration_note = 'Forward/up calibration • centered camera required'
         self.span = .1
         self.span = .16*STATION_BASE_SCALE
         self.station_scale = 1.

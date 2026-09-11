@@ -103,3 +103,13 @@ health route, invalid and oversized requests, URL restrictions, last-good data,
 stale/disconnected flags, recording preservation and syntax. Docker/Gunicorn
 deployment, real HTTPS service and native desktop UI still need an actual run.
 The development runtime's Tk initialization issue prevents native UI validation.
+
+## Version 3 orientation calibration
+
+Both local and remote ships use the measured zero-angle forward/up frame.
+Keep the camera centered and disable headtracking/freelook for ship attitude.
+Raw OCR and network angles are unchanged; no yaw-only inversion is applied.
+Use this package on both PCs. Existing server protocol is compatible. For new
+session recordings to include the revised calibration metadata, deploy this
+package to the server too. This revision has not been deployed automatically.
+The zero frame is approximate and combined rotations need live validation.
