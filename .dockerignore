@@ -1,0 +1,7 @@
+__pycache__
+*.json
+!calibration.json
+*.jsonl
+.env*
+recordings
+*.zip
