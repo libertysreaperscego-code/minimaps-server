@@ -24,7 +24,7 @@ CALIBRATION_ANGLES = (95., 0., 9.)
 STATION_TOP_Z = 200.9345
 STATION_HEIGHT_M = (STATION_TOP_Z - REFERENCE[2]) * 1000
 STATION_BASE_SCALE = STATION_HEIGHT_M / 195.0
-FRAME_ROTATION = ((-0.6853462109896081, 0.7233816293958923, -0.08378298953087897), (-0.7282053752580094, -0.6801229273057725, 0.08455610680706975), (0.004183602219300927, 0.11896143074782947, 0.992890062125158))
+FRAME_ROTATION = ((0.18561594878318913, -0.977342345709433, 0.10172835809399311), (0.9826053575516186, 0.18522453961952084, -0.013363428960880814), (-0.005781943286861003, 0.10243929522365781, 0.9947224537155618))
 
 
 def station_geometry():
@@ -299,7 +299,7 @@ def direction_error(a, b):
 
 def enrich_sample(sample, mode, second_reference=None, phase=None):
     sample['observation_type'] = mode
-    sample['rotation_model'] = 'v11_zero_forward_up_Q_Rz(C)_Ry(B)_Rx(A)_nose_plusY'
+    sample['rotation_model'] = 'v12_fresh_zero_forward_up_Q_Rz(C)_Ry(B)_Rx(A)_nose_plusY'
     sample['display_frame_rotation'] = FRAME_ROTATION
     sample['calibration_status'] = 'approximate_zero_frame_centered_camera_required'
     sample['candidate_nose_error_degrees'] = direction_error(rotate((0,1,0), sample['camdir_raw']), sample['direction_to_reference']) if mode != 'roll_sequence' else None

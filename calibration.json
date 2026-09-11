@@ -7,33 +7,81 @@
   "STATION_TOP_Z": 200.9345,
   "FRAME_ROTATION": [
     [
-      -0.6853462109896081,
-      0.7233816293958923,
-      -0.08378298953087897
+      0.18561594878318913,
+      -0.977342345709433,
+      0.10172835809399311
     ],
     [
-      -0.7282053752580094,
-      -0.6801229273057725,
-      0.08455610680706975
+      0.9826053575516186,
+      0.18522453961952084,
+      -0.013363428960880814
     ],
     [
-      0.004183602219300927,
-      0.11896143074782947,
-      0.992890062125158
+      -0.005781943286861003,
+      0.10243929522365781,
+      0.9947224537155618
     ]
   ],
-  "model": "v11: Q Rz(C) Ry(B) Rx(A), local right +X, nose +Y, up +Z",
+  "model": "v12: Q Rz(C) Ry(B) Rx(A), local right +X, nose +Y, up +Z",
   "method": "Preserve normalized forward; orthogonalize measured up against forward; right = forward cross up",
   "forward_displacement_m": [
-    120.4,
-    -113.2,
-    19.8
+    -164.1,
+    31.1,
+    17.2
   ],
   "up_displacement_m": [
-    -12.6,
-    12.9,
-    181.3
+    10.0,
+    -1.3,
+    100.1
   ],
-  "measured_axis_angle_deg": 88.84280355269865,
-  "limitations": "Approximate. Up capture ended at CamDir (0,0,1). Centered camera required. Combined rotations require live validation."
+  "measured_axis_angle_deg": 89.8633430523829,
+  "limitations": "Approximate fresh zero-angle calibration; centered camera required. Combined rotations require live validation.",
+  "samples": [
+    {
+      "kind": "forward",
+      "camdir_start": [
+        0,
+        0,
+        0
+      ],
+      "camdir_end": [
+        0,
+        0,
+        0
+      ],
+      "start_km": [
+        11.6765,
+        -419.6622,
+        199.9255
+      ],
+      "end_km": [
+        11.5124,
+        -419.6311,
+        199.9427
+      ]
+    },
+    {
+      "kind": "up_strafe",
+      "camdir_start": [
+        0,
+        0,
+        0
+      ],
+      "camdir_end": [
+        0,
+        0,
+        0
+      ],
+      "start_km": [
+        11.5124,
+        -419.6309,
+        199.9428
+      ],
+      "end_km": [
+        11.5224,
+        -419.6322,
+        200.0429
+      ]
+    }
+  ]
 }

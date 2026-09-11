@@ -104,7 +104,7 @@ stale/disconnected flags, recording preservation and syntax. Docker/Gunicorn
 deployment, real HTTPS service and native desktop UI still need an actual run.
 The development runtime's Tk initialization issue prevents native UI validation.
 
-## Version 3 orientation calibration
+## Version 4 orientation calibration
 
 Both local and remote ships use the measured zero-angle forward/up frame.
 Keep the camera centered and disable headtracking/freelook for ship attitude.
@@ -113,3 +113,6 @@ Use this package on both PCs. Existing server protocol is compatible. For new
 session recordings to include the revised calibration metadata, deploy this
 package to the server too. This revision has not been deployed automatically.
 The zero frame is approximate and combined rotations need live validation.
+
+This version uses only the fresh forward (-164.1, 31.1, 17.2 m) and up
+(10.0, -1.3, 100.1 m) measurements. Earlier calibration measurements are excluded.
